@@ -1,0 +1,51 @@
+.img404{
+    width: 50%;
+    margin-top: 25px;
+    float: left;
+}
+
+.img-logo {
+    width: 90%;
+    
+}
+.h1404 {
+    width: 50%;
+    margin-top: 130px;
+    padding-left: 30px;
+    color: #ff0000;
+    float: right;
+}
+
+.map-bottom-left {
+    float: left;
+    width: 68%;
+    padding-top: 34px;
+
+}
+.map-bottom-right {
+    padding: 154px 34px;
+    width: 30%;
+    float: right;
+}
+.mapa{
+    width: 35px;
+    height: 35px;
+    float: left;
+}
+
+.derecha {
+    float: right;
+    
+}
+
+.div-mitad {
+    width: 50%;
+}
+
+.izquierda {
+    float: left;
+}
+
+.rojo{
+    color: #ff0000;
+}
