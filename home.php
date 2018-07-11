@@ -11,13 +11,15 @@
 	//print_r($producto["nombre"])
 
 	
-	$api = file_get_contents("http://localhost/MercadoTech/api/"); // version remota del include... misma funcion, descarga una copia
-	
-	//print_r($api);
-
+	$api = file_get_contents("http://localhost/MercadoTech/api/?d=productos"); // version remota del include... misma funcion, descarga una copia
 	$productos=json_decode($api); //objeto standard, si le pongo un segundo parametro que es true me hace un array assoc
 
-	//print_r ($productos);
+	$api = file_get_contents("http://localhost/MercadoTech/api/?d=ultimos"); // version remota del include... misma funcion, descarga una copia
+	$ultimos=json_decode($api); //objeto standard, si le pongo un segundo parametro que es true me hace un array assoc
+	
+	//print_r($productos);
+	//print_r($ultimos);
+	//die(); para el script hasta esta linea es como un breakpoint
 
 ?>
 
@@ -71,21 +73,29 @@
 		<a class="view-all" href="./?p=producto">VER TODOS<span></span></a>
 	</div>
 	<div class="product-left">
+	<?php 
+		 $i=1;
+		 foreach($ultimos as $ultimo) {
+		$class= ($i % 3==0) ? "grid-top-chain": null;
+	?>
 		<!-- Producto #1 -->
 		<div class="col-sm-4 col-md-4 chain-grid">
-			<a href="./?p=producto"><img class="img-responsive chain" src="images/productos/P004.jpg" alt=" " /></a>
+			<a href="./?p=producto"><img class="img-responsive chain" src="<?php echo $ultimo->Imagen ?>" alt=" " /></a>
 			<span class="star"></span>
 			<div class="grid-chain-bottom">
-				<h6><a href="producto.html">Lorem ipsum dolor #1</a></h6>
+				<h6><a href="producto.html"><?php echo $ultimo->Nombre ?></a></h6>
 				<div class="star-price">
 					<div class="dolor-grid"> 
-						<span class="actual">$300</span>
+						<span class="actual"><?php echo $ultimo->Precio ?></span>
 					</div>
 					<a class="now-get get-cart" href="./?p=producto">VER MÁS</a> 
 					<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
+		<?php 
+		 }
+			?>
 	
 	</div>
 	<div class="clearfix"> </div>
