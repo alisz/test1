@@ -102,8 +102,9 @@ function Borrar ($id) {
 
 // Agregar($datos);
 
-Actualizar(20.5, 1);
+//Actualizar(20.5, 1);
 
+Borrar(2);
 
 
 ?>
