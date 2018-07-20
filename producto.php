@@ -2,12 +2,18 @@
 
 if( !isset($_GET["id"]) || !filter_var($_GET["id"], FILTER_VALIDATE_INT)) header ("location: index.php");
 
+require "db.php";
+
 $id= $_GET["id"];
+
+ 
+
+
 
 
 
 //busca en el array el id si no lo encuentra tira -1
-$item=array_search($id, array_column($productos, "idProducto")); 
+$item=; Mostrar($id);
 if ($item==-1) haeder ("location: ./?p=404"); 
 
 

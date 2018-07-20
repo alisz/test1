@@ -1,4 +1,13 @@
 <?php 
+	
+	require "db.php";
+
+	$productos= Mostrar();
+
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////
 	// $producto["iphone 7", 599.99, 600];
 	// $producto = array("iphone 7", 599.99, 600);
     //print_r($producto);
@@ -11,11 +20,11 @@
 	//print_r($producto["nombre"])
 
 	
-	$api = file_get_contents("http://localhost/MercadoTech/api/?d=productos"); // version remota del include... misma funcion, descarga una copia
-	$productos=json_decode($api); //objeto standard, si le pongo un segundo parametro que es true me hace un array assoc
+	//$api = file_get_contents("http://localhost/MercadoTech/api/?d=productos"); // version remota del include... misma funcion, descarga una copia
+	//$productos=json_decode($api); //objeto standard, si le pongo un segundo parametro que es true me hace un array assoc
 
-	$api = file_get_contents("http://localhost/MercadoTech/api/?d=ultimos"); // version remota del include... misma funcion, descarga una copia
-	$ultimos=json_decode($api); //objeto standard, si le pongo un segundo parametro que es true me hace un array assoc
+	//$api = file_get_contents("http://localhost/MercadoTech/api/?d=ultimos"); // version remota del include... misma funcion, descarga una copia
+	//$ultimos=json_decode($api); //objeto standard, si le pongo un segundo parametro que es true me hace un array assoc
 	
 	//print_r($productos);
 	//print_r($ultimos);
@@ -47,15 +56,15 @@
 					
 		?>
 		<div class="col-sm-4 col-md-4 chain-grid <?php echo $class ?>">
-			<a href="./?p=producto&id=<?php echo $producto->idProducto ?>"><img class="img-responsive chain" src="<?php echo $producto->Imagen ?>" alt=" " /></a>
+			<a href="./?p=producto&id=<?php echo $producto["idProducto"] ?>"><img class="img-responsive chain" src="<?php echo $producto["Imagen"] ?>" alt=" " /></a>
 			<div class="grid-chain-bottom">
-				<h6><a href="./?p=producto&id=<?php echo $producto->idProducto ?>"><?php echo $producto->Nombre ?></a></h6>
+				<h6><a href="./?p=producto&id=<?php echo $producto["idProducto"] ?>"><?php echo $producto["Nombre"] ?></a></h6>
 				<div class="star-price">
 					<div class="dolor-grid"> 
-						<span class="actual">$<?php echo $producto->Precio ?></span>
+						<span class="actual">$<?php echo $producto["Precio"] ?></span>
 						
 					</div>
-					<a class="now-get get-cart" href="./?p=producto&id=<?php echo $producto->idProducto ?>">VER MÁS</a> 
+					<a class="now-get get-cart" href="./?p=producto&id=<?php echo $producto["idProducto"] ?>">VER MÁS</a> 
 					<div class="clearfix"></div>
 				</div>
 			</div>

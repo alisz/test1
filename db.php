@@ -22,12 +22,28 @@ function Conexion() {
 	}
 }
 
-function Mostrar() {
+function Mostrar($id=0) { //parametro condicional si no viene le asigna el valor 0
 	
 	$conexion=Conexion();
+	
+	$sqlQuery="SELECT idProducto, Nombre, Precio, Detalle, Imagen, Stock FROM productos LIMIT 0, 12";
 
-	$mostrar = $conexion->query("SELECT Nombre, Precio, Detalle, Stock FROM productos ORDER BY Precio ASC");
-	print_r( $mostrar->fetchAll(PDO::FETCH_ASSOC) );
+	if (!$id) {
+		
+		$mostrar = $conexion->query($sqlQuery);
+		return $mostrar->fetchAll(PDO::FETCH_ASSOC);
+	}
+	else 
+			{
+				$sqlQuery= $sqlQuery. " WHERE idProducto= :id";
+				$mostrar = $conexion->prepare($sqlQuery);
+				$mostrar->bindParam(":id", $id, PDO::PARAM_INT);
+				
+				if ($mostrar->execute() && $mostrar->rowCount()>0){
+					return $mostrar->fetch();
+				} else return "producto no encontrado";
+			}		
+	
 }
 
 function Agregar($producto) {
@@ -53,14 +69,23 @@ function Agregar($producto) {
 	
 }
 
-function Actualizar ($preciofinal, $id) {
+function Actualizar ($id, $producto) {
 	
 	$conexion=Conexion();
 
-	$actualizar = $conexion->prepare("UPDATE productos SET Precio = :precio WHERE idProducto = :id");
-	$actualizar->bindParam(":precio", $precioFinal, PDO::PARAM_STR);
+	$actualizar = $conexion->prepare("UPDATE productos SET Nombre = :n, Precio = :p, Marca = :m, Categoria = :c, 
+														   Detalle = :d, Imagen = :i, Stock = :s
+														  WHERE idProducto = :id");
+	
 	$actualizar->bindParam(":id", $id, PDO::PARAM_INT);
 	
+	$actualizar ->bindParam(":n", $producto["Nombre"],    PDO::PARAM_STR);
+	$actualizar ->bindParam(":p", $producto["Precio"],    PDO::PARAM_STR);
+	$actualizar ->bindParam(":m", $producto["Marca"],     PDO::PARAM_INT);
+	$actualizar ->bindParam(":c", $producto["Categoria"], PDO::PARAM_INT);
+	$actualizar ->bindParam(":d", $producto["Detalle"],   PDO::PARAM_STR);
+	$actualizar ->bindParam(":i", $producto["Imagen"],    PDO::PARAM_STR);
+	$actualizar ->bindParam(":s", $producto["Stock"],     PDO::PARAM_INT);
 	
 	if ( $actualizar->execute() ) {
 		echo "Producto actualizado correctamente!";
@@ -75,6 +100,7 @@ function Borrar ($id) {
 	$conexion=Conexion();
 
 	$borrar = $conexion->prepare("DELETE FROM productos WHERE idProducto = :id");
+	
 	$borrar->bindParam(":id", $id, PDO::PARAM_INT);
 
 	if ( $borrar->execute() ) {
@@ -88,7 +114,7 @@ function Borrar ($id) {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//Mostrar();
+//print_r (Mostrar());
 
 /* $datos = array (
     	"Nombre"    =>"IPad",
@@ -102,9 +128,11 @@ function Borrar ($id) {
 
 // Agregar($datos);
 
-//Actualizar(20.5, 1);
+// Actualizar(60, $datos);
 
-Borrar(2);
+// Borrar(2);
+
+
 
 
 ?>
