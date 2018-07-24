@@ -1,6 +1,6 @@
 <?php 
 	
-	require "db.php";
+	require "admin/db.php";
 
 	$productos= Mostrar();
 
