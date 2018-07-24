@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<base href="http://localhost/MercadoTech/">
 		<meta charset="utf-8">
 		<title>MercadoTECH | Tu E-Shop en PHP</title>
 		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" /> 

@@ -1,22 +1,17 @@
 <?php
 
-if( !isset($_GET["id"]) || !filter_var($_GET["id"], FILTER_VALIDATE_INT)) header ("location: index.php");
+	if( !isset($_GET["id"]) || !filter_var($_GET["id"], FILTER_VALIDATE_INT)) header ("location: index.php");
 
-require "db.php";
+	require "db.php";
 
-$id= $_GET["id"];
+	$id= $_GET["id"];
 
  
+			//busca en el array el id si no lo encuentra tira -1
+	$producto= Mostrar($id);
+								//print_r ($producto);
 
-
-
-
-
-//busca en el array el id si no lo encuentra tira -1
-$item=; Mostrar($id);
-if ($item==-1) haeder ("location: ./?p=404"); 
-
-
+	if ($producto==-1) haeder ("location: ./?p=404"); 
 
 ?>
 
@@ -26,15 +21,15 @@ if ($item==-1) haeder ("location: ./?p=404");
 		<div class="grid images_3_of_2">
 			<ul id="etalage">
 				<li>
-					<img class="etalage_thumb_image" src="<?php echo $productos[$item]["Imagen"] ?>" class="img-responsive" />
+					<img class="etalage_thumb_image" src="<?php echo $producto["Imagen"] ?>" class="img-responsive" />
 				</li>
 			</ul>
 			<div class="clearfix"></div>		
 		</div>
 		<div class="desc1 span_3_of_2">
-			<h4><?php echo $productos[$item]["Nombre"] ?></h4>
+			<h4><?php echo $producto["Nombre"] ?></h4>
 			<div class="cart-b">
-				<div class="left-n ">$<?php echo $productos[$item]["Precio"] ?></div>
+				<div class="left-n ">$<?php echo $producto["Precio"] ?></div>
 				<a class="now-get get-cart-in" href="#">COMPRAR</a> 
 				<div class="clearfix"></div>
 			</div>

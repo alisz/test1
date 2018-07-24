@@ -26,7 +26,7 @@ function Mostrar($id=0) { //parametro condicional si no viene le asigna el valor
 	
 	$conexion=Conexion();
 	
-	$sqlQuery="SELECT idProducto, Nombre, Precio, Detalle, Imagen, Stock FROM productos LIMIT 0, 12";
+	$sqlQuery="SELECT idProducto, Nombre, Precio, Detalle, Imagen, Stock FROM productos ";
 
 	if (!$id) {
 		
