@@ -1,9 +1,22 @@
 <?php
-		include "../header.php";
+	include "../header.php";
+
+	if( !isset($_GET["id"]) || !filter_var($_GET["id"], FILTER_VALIDATE_INT)) header ("location: index.php");
+
+	require "db.php";
+
+	$id= $_GET["id"];
+
+			//busca en el array el id si no lo encuentra tira -1
+	$producto= Mostrar($id);
+								print_r ($producto);
+
+	if ($producto==-1) haeder ("location: ./?p=404"); 
+
 ?>
 
 <div class="container">
-	<h1>Agregar nuevo producto</h1>
+	<h1>Editar producto</h1>
 
 	<form method="post" class="form-horizontal" enctype="multipart/form-data">
 

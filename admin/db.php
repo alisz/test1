@@ -62,9 +62,11 @@ function Agregar($producto) {
 
 	
 	if( $agregar ->execute() ){
-		echo "Producto registrado correctamente";
+		//echo "Producto registrado correctamente";
+		return true;
 	} else {
-		echo "Ocurrio un error :(";
+		//echo "Ocurrio un error :(";
+		return false;
 	}
 	
 }
