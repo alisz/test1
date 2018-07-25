@@ -108,9 +108,11 @@ function Borrar ($id) {
 	$borrar->bindParam(":id", $id, PDO::PARAM_INT);
 
 	if ( $borrar->execute() ) {
-		echo "Producto borrado correctamente!";
+		//echo "Producto borrado correctamente!";
+		return true;
 	} else {
-		echo "Ocurrio un error :(";
+		//echo "Ocurrio un error :(";
+		return false;
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
