@@ -90,9 +90,11 @@ function Actualizar ($id, $producto) {
 	$actualizar ->bindParam(":s", $producto["Stock"],     PDO::PARAM_INT);
 	
 	if ( $actualizar->execute() ) {
-		echo "Producto actualizado correctamente!";
+		//echo "Producto actualizado correctamente!";
+		return true;
 	} else {
-		echo "Ocurrio un error :(";
+		//echo "Ocurrio un error :(";
+		return false;
 	}
 	
 }
