@@ -1,8 +1,15 @@
 <?php
+		require "db.php";
+
+		$marcas=MostrarTodo("marcas");
+		//print_r ($marcas);
+		$categorias=MostrarTodo("categorias");
+		//print_r ($categorias);
+
 		if( $_SERVER["REQUEST_METHOD"] == "POST" ){ //--> Si la peticion http es POST...
 			//▼ Aca programo que hacer con los datos del formulario de contacto ▼
 			
-			require "db.php";
+			
 					//echo "metodo POST";
 					//print_r ($_POST);
 			////////////////////////////////////////////
@@ -14,13 +21,16 @@
 				"Nombre" => $_POST["Nombre"],
 				"Precio" => $_POST["Precio"],
 				"Marca" => $_POST["Marca"],
-				"Categoria" => 1,
+				"Categoria" => $_POST["Categoria"],
 				"Detalle" => $_POST["Detalle"],
 				"Imagen" => "https://image.ibb.co/hK2VTT/sin_foto.jpg",
 				"Stock" => $_POST["Stock"],
 			);
+
+			//print_r ($datos);
+
 			if (Agregar($datos)) {
-					header ("loacation: index.php?rta=ok");
+					header ("location: index.php?rta=ok");
 			} else  header("location: index.php?rta=error");
 			
 			
@@ -52,8 +62,33 @@
 		<input class="form-control" type="number" name="Stock">
 
 		<label class="control-label">Marca:</label>
-		<input class="form-control" type="text" name="Marca">
-
+		<select class="form-control" name="Marca">
+		<?php 
+			  foreach ($marcas as $marca) {
+			  
+	    ?>	
+    			<option value="<?php echo $marca["idMarca"]?>"><?php echo $marca["Marca"]?></option>
+				
+				
+		<?php 
+		      }
+		?>
+       </select>
+	  
+	   <label class="control-label">Categoria:</label>
+	   <select class="form-control" name="Categoria">
+		<?php 
+			  foreach ($categorias as $categoria) {
+			  
+	    ?>	
+    			<option value="<?php echo $categoria["idCategoria"]?>"><?php echo $categoria["Categoria"]?></option>
+				
+		<?php 
+		      }
+		?>
+       </select>
+	  
+		
 		<label class="control-label">Detalle:</label>
 		<textarea class="form-control" rows="5" name="Detalle"></textarea>
 		
@@ -62,6 +97,7 @@
 		
 		<br>
 		
+
 		<button type="submit" class="btn btn-default">Guardar</button>
 
 	</form>

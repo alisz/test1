@@ -46,11 +46,24 @@ function Mostrar($id=0) { //parametro condicional si no viene le asigna el valor
 	
 }
 
+function MostrarTodo($tabla) {
+
+	$conexion=Conexion();
+	
+	$sqlQuery="SELECT * FROM " . $tabla;
+		
+		$mostrar = $conexion->query($sqlQuery);
+		return $mostrar->fetchAll(PDO::FETCH_ASSOC);
+	
+
+
+}
+
 function Agregar($producto) {
 
 	$conexion=Conexion();
 
-	$agregar = $conexion->prepare("INSERT INTO productos (Nombre, Precio, Marca, Categoria, Detalle, Imagen, Stock) VALUES	(:n, :p, :m, :c, :d, :i, :s)");
+	$agregar = $conexion->prepare("INSERT INTO productos (Nombre, Precio, idMarca, idCategoria, Detalle, Imagen, Stock) VALUES	(:n, :p, :m, :c, :d, :i, :s)");
 
 	$agregar ->bindParam(":n", $producto["Nombre"],    PDO::PARAM_STR);
 	$agregar ->bindParam(":p", $producto["Precio"],    PDO::PARAM_STR);
@@ -75,7 +88,7 @@ function Actualizar ($id, $producto) {
 	
 	$conexion=Conexion();
 
-	$actualizar = $conexion->prepare("UPDATE productos SET Nombre = :n, Precio = :p, Marca = :m, Categoria = :c, 
+	$actualizar = $conexion->prepare("UPDATE productos SET Nombre = :n, Precio = :p, idMarca = :m, idCategoria = :c, 
 														   Detalle = :d, Imagen = :i, Stock = :s
 														  WHERE idProducto = :id");
 	
