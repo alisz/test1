@@ -1,8 +1,22 @@
+<?php
+	if( $_SERVER["REQUEST_METHOD"] == "POST"){
+
+		require "admin/usuario.php";
+
+		$datos = array(
+			"Email" => $_POST["email"],
+			"Pass" => $_POST["pass"]
+		);
+		crearUsuario($datos);
+
+	} else {
+
+?>
 <section id="page">
 	<div class="register">
 		<div class="register-top-grid">
 			<h3>NUEVO USUARIO</h3>
-			<form action="#" method="post">
+			<form method="post">
 				<div class="mation">
 					<span>Nombre: <label>*</label></span>
 					<input type="text" name="nombre"> 
@@ -21,3 +35,4 @@
 		<div class="clearfix"></div>
 	</div>
 </section>
+<?php } ?>
