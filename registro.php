@@ -4,6 +4,8 @@
 		require "admin/usuario.php";
 		//validar datos
 		$datos = array(
+			"Nombre"=> $_POST["nombre"],
+			"Apellido"=> $_POST ["apellido"],
 			"Email" => $_POST["email"],
 			"Pass" => $_POST["pass"]
 		);
