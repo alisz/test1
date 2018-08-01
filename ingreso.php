@@ -1,8 +1,24 @@
+<?php
+	if( $_SERVER["REQUEST_METHOD"] == "POST"){
+
+		require "admin/usuario.php";
+		//deberia validar datos
+		$datos= array (
+			"mail" => $_POST["email"], 
+			"pass" => $_POST["pass"]
+		);
+
+		iniciarSesion($datos);
+		
+	} else {
+
+?>
+
 <section id="page">
-				<div class="account_grid">
+	<div class="account_grid">
 	<div class="login-right">
 		<h3>INGRESO DE USUARIO</h3>
-		<form action="#" method="post">
+		<form method="post">
 		<div>
 			<span>E-Mail:</span>
 			<input type="text" name="email"> 
@@ -22,4 +38,8 @@
 	</div>
 	<div class="clearfix"></div>
 </div>
-			</section>
+</section>
+<?php 
+
+	}
+?>

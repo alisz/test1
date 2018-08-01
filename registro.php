@@ -2,7 +2,7 @@
 	if( $_SERVER["REQUEST_METHOD"] == "POST"){
 
 		require "admin/usuario.php";
-
+		//validar datos
 		$datos = array(
 			"Email" => $_POST["email"],
 			"Pass" => $_POST["pass"]

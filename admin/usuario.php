@@ -19,8 +19,35 @@
 		
 	}
 
-	function iniciarSesion(){
+	function iniciarSesion($datos){
+		
+		
+		$conexion = Conexion();
 
+		$email_usuario = filter_var($datos["mail"], FILTER_SANITIZE_EMAIL);
+		$pass_usuario = filter_var($datos["pass"], FILTER_SANITIZE_SPECIAL_CHARS );
+		
+
+		$usuario = $conexion->prepare("SELECT * FROM usuarios WHERE email= :e");
+		$usuario->bindParam(":e", $email_usuario, PDO::PARAM_STR);
+
+		if ($usuario->execute() && $usuario->rowCount()==1){
+			 //El usuario existe
+									//print_r($usuario->fetch(PDO::FETCH_ASSOC));
+									//die();
+			$usuario=$usuario->fetch(PDO::FETCH_ASSOC); // con esto sobreescribo y borro todo 
+					//print_r($usuario);
+					//die();	    					//lo que tenga que ver con la conexion
+
+			if (password_verify($pass_usuario, $usuario["password"])){
+					//password_verify, busca el algoritmo y desencripta
+					//Si estoy aca el usuario inicio sesion
+					session_start();
+														//print_r($_SESSION);
+														
+					
+			}
+		}
 	}
 
 	function cerrarSesion(){
